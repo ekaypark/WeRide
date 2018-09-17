@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %title WeRide
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css", :integrity => "sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4", :rel => "stylesheet"}/
+
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    = render '/layouts/gnb'
+    .container
+      = yield

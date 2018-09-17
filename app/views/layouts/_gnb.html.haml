@@ -1,0 +1,19 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container
+    %a.navbar-brand{:href => root_path}
+      %span{style: "font-size: 27px;font-weight: bold;"} WeRide
+    %button.navbar-toggler{"aria-controls" => "navbarNavAltMarkup", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavAltMarkup", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarNavAltMarkup.collapse.navbar-collapse
+      / .navbar-nav
+      /   %a.nav-item.nav-link{:href => "#"} Features
+      /   %a.nav-item.nav-link{:href => "#"} Pricing
+      /   %a.nav-item.nav-link.disabled{:href => "#"} Disabled
+
+      .navbar-nav.pull-right
+        - if member_signed_in?
+          %a.nav-item.nav-link{href: my_page_path} My Page
+          %a.nav-item.nav-link{href: destroy_member_session_path, "data-method" => "delete"} Sign Out
+        - else
+          %a.nav-item.nav-link{href: new_member_session_path} Sign In
+          %a.nav-item.nav-link{href: new_member_registration_path} Register
