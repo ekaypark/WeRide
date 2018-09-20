@@ -28,6 +28,17 @@
     %i (we need your current password to confirm your changes)
     %br/
     = f.password_field :current_password, autocomplete: "current-password"
+  .field
+    %br/
+    = f.text_field :first_name
+
+  .field
+    %br/
+    = f.text_field :last_name
+  .field
+    %br/
+    = f.date_field :dob, label: "Date of Birth"
+
   .actions
     = f.submit "Update"
 %h3 Cancel my account
