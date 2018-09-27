@@ -1,5 +1,8 @@
-%h2{style: "display: inline"}= "#{@user.email}'s Page"
+%h2{style: "display: inline"}= "#{@member.email}'s Page"
 %a.pull-right{href: edit_member_registration_path} Edit My Info
 %hr
 
 %h3 My Activities
+
+- @member.activities.each do |a|
+  = link_to a.title, activity_path(a)

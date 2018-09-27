@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :authenticate_member!
+  before_action :authenticate_member!, except: :show
 
   def new
     @activity = Activity.new
@@ -13,6 +13,10 @@ class ActivitiesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def show
+    @activity = Activity.find params[:id]
   end
 
   private

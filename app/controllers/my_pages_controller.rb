@@ -2,7 +2,7 @@ class MyPagesController < ApplicationController
   before_action :authenticate_member!
 
   def show
-    @user = current_member
+    @member = current_member
   end
 
   # def edit
