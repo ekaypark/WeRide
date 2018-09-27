@@ -8,7 +8,9 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new activity_params
     @activity.member = current_member
-    if @activity.save
+    if @activity.valid?
+      @activity.status = Activity.statuses["pending"]
+      @activity.save
       redirect_to my_page_path
     else
       render 'new'
@@ -22,6 +24,6 @@ class ActivitiesController < ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:member_id, :location, :category, :intro, :overview, :address01, :address02, :zipcode, :legal_requirement, :host_arrangement, :participant_preparation, :notes, :price, :title)
+    params.require(:activity).permit(:member_id, :location, :category, :intro, :overview, :address01, :address02, :zipcode, :legal_requirement, :host_arrangement, :participant_preparation, :notes, :price, :title, :status)
   end
 end
