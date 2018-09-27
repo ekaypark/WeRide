@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   get 'pages/landing'
   root 'pages#landing'
 
+  resources :activities
   resource :my_page
 end

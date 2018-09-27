@@ -6,4 +6,6 @@ class Member < ApplicationRecord
 
   validates :first_name, :last_name, :dob, :email, presence: true
   validates :email, uniqueness: true
+
+  has_many :activities
 end
