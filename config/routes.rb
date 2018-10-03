@@ -7,4 +7,12 @@ Rails.application.routes.draw do
 
   resources :activities
   resource :my_page
+
+  namespace :admin do
+    root 'activities#index'
+
+    resources :activities do
+      post :approve, on: :member
+    end
+  end
 end

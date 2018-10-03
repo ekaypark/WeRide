@@ -1,0 +1,6 @@
+= render "activity_show"
+
+- unless @activity.approved?
+  = link_to "approve", approve_admin_activity_path(@activity), method: :post
+
+= link_to "Back to the List", admin_activities_path

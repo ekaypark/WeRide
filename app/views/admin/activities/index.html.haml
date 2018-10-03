@@ -1,0 +1,31 @@
+%ul.nav.nav-tabs.status-tabs
+  %li.pending
+    %a{:href => admin_activities_path(activity_status: "pending")}="Pending (#{Activity.pending.count})"
+
+  %li.approved
+    %a{:href => admin_activities_path(activity_status: "approved")}="Approved (#{Activity.approved.count})"
+  %li.draft
+    %a{:href => "#", disabled: true, style: 'color: gray;'}="Draft (#{Activity.draft.count})"
+
+- @activities.each do |a|
+  = link_to a.title, admin_activity_path(a)
+  = a.member.first_name
+
+:javascript
+  $(document).ready(function () {
+
+    var activity_status = getUrlParameter("activity_status");
+
+    console.log(activity_status);
+
+
+
+    if ( typeof activity_status == "undefined" ) {
+      $('.status-tabs').find("li").removeClass("active");
+      $('.pending').addClass("active");
+    } else {
+      $('.status-tabs').find("li").removeClass("active");
+      $("." + activity_status).addClass("active");
+    };
+  });
+

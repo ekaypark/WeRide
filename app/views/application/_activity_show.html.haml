@@ -1,0 +1,24 @@
+%h2= @activity.title
+%span="#{@activity.category} Experience"
+%br
+%span= "Activity hosted by #{@activity.member.first_name}"
+%br
+%span= @activity.location
+%br
+
+%hr
+%h5= "About Your Host #{@activity.member.first_name}"
+%p= @activity.intro
+
+%hr
+%h5 What We'll Do
+%p= @activity.overview
+
+%hr
+%h5 What I'll Provide
+%p= @activity.host_arrangement
+
+%hr
+%h5 Notes
+%p= @activity.notes
+
