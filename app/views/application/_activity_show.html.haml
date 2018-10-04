@@ -7,7 +7,7 @@
 %br
 
 %hr
-%h5= "About Your Host #{@activity.member.first_name}"
+%h5= "About Your Host: #{@activity.member.first_name}"
 %p= @activity.intro
 
 %hr
@@ -22,3 +22,32 @@
 %h5 Notes
 %p= @activity.notes
 
+%h3 Setting infos
+
+%hr
+%h5 Alcohol Served
+%p= @activity.alcohol_served
+
+%hr
+%h5 Minimum Age
+%p= @activity.minimum_age
+
+%hr
+%h5 How Active
+%p= @activity.how_active
+
+%hr
+%h5 Additional Requirement
+%p= @activity.additional_requirement
+
+%hr
+%h5 ID Required?
+%p= @activity.id_required
+
+%hr
+%h5 Group size
+%p= @activity.group_size
+
+%hr
+%h5 Total Time
+%p= @activity.total_time

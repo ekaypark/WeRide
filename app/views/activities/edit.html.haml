@@ -1,4 +1,4 @@
-%h2 New Activity
+%h2 Edit Activity
 %hr
 
 = bootstrap_form_for @activity do |f|
@@ -31,7 +31,6 @@
 
   = f.label "Alcohol Served"
   = f.check_box :alcohol_served, label: "Yes"
-
   = f.select :minimum_age do
     = options_for_select(Activity::MINIMUM_AGE_ARRAY)
 

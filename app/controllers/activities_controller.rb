@@ -21,9 +21,22 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find params[:id]
   end
 
+  def edit
+    @activity = Activity.find params[:id]
+  end
+
+  def update
+    @activity = Activity.find params[:id]
+    if @activity.update activity_params
+      redirect_to @activity
+    else
+      render :new
+    end
+  end
+
   private
 
   def activity_params
-    params.require(:activity).permit(:member_id, :location, :category, :intro, :overview, :address01, :address02, :zipcode, :legal_requirement, :host_arrangement, :participant_preparation, :notes, :price, :title, :status)
+    params.require(:activity).permit(:member_id, :location, :category, :intro, :overview, :address01, :address02, :zipcode, :legal_requirement, :host_arrangement, :participant_preparation, :notes, :price, :title, :status, :alcohol_served, :minimum_age, :how_active, :additional_requirement, :id_required, :group_size, :total_time)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_27_200820) do
+ActiveRecord::Schema.define(version: 2018_10_03_172940) do
 
   create_table "activities", force: :cascade do |t|
     t.integer "member_id"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 2018_09_27_200820) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
+    t.boolean "alcohol_served", default: false
+    t.integer "minimum_age"
+    t.integer "how_active"
+    t.text "additional_requirement"
+    t.boolean "id_required", default: false
+    t.integer "group_size"
+    t.integer "total_time"
   end
 
   create_table "members", force: :cascade do |t|
