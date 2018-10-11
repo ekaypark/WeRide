@@ -1,7 +1,8 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+%nav.navbar.navbar-expand-lg.navbar-light.fixed-top.header
   .container
     %a.navbar-brand{:href => root_path}
-      %span{style: "font-size: 27px;font-weight: bold;"} WeRide
+      .logo-wrapper
+        = image_tag 'logo.png', alt: 'WeRide'
     %button.navbar-toggler{"aria-controls" => "navbarNavAltMarkup", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavAltMarkup", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbarNavAltMarkup.collapse.navbar-collapse
