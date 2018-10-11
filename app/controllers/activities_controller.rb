@@ -11,6 +11,8 @@ class ActivitiesController < ApplicationController
     if @activity.valid?
       @activity.status = Activity.statuses["pending"]
       @activity.save
+      # probably need a different logic later e.g. host info.
+      @activity.member.host! if @activity.member.user?
       redirect_to my_page_path
     else
       render 'new'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_03_172940) do
+ActiveRecord::Schema.define(version: 2018_10_05_030835) do
 
   create_table "activities", force: :cascade do |t|
     t.integer "member_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2018_10_03_172940) do
     t.string "first_name"
     t.string "last_name"
     t.date "dob"
+    t.integer "role", default: 0
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end

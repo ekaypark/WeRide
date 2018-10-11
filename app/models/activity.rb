@@ -1,7 +1,7 @@
 class Activity < ApplicationRecord
   belongs_to :member
 
-  enum status: [ :draft, :pending, :approved]
+  enum status: [ :draft, :pending, :approved, :signature ]
 
   CATEGORY = ["Art and Design", "Fashion", "Entertainment",  "Sports", "Wellness", "Nature", "Food and drink", "Lifestyle", "History", "Music", "Business", "Nightlife"]
 

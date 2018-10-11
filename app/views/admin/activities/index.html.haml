@@ -4,12 +4,25 @@
 
   %li.approved
     %a{:href => admin_activities_path(activity_status: "approved")}="Approved (#{Activity.approved.count})"
+  %li.signature
+    %a{:href => admin_activities_path(activity_status: "signature")}="Signature (#{Activity.signature.count})"
   %li.draft
     %a{:href => "#", disabled: true, style: 'color: gray;'}="Draft (#{Activity.draft.count})"
 
-- @activities.each do |a|
-  = link_to a.title, admin_activity_path(a)
-  = a.member.first_name
+
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Author
+  %tbody
+    - @activities.each do |a|
+      %tr
+        %td= link_to a.title, admin_activity_path(a)
+        %td= a.member.first_name
+
+%br
+= link_to "New Signature Ride", new_admin_activity_path, class: 'btn btn-primary'
 
 :javascript
   $(document).ready(function () {
