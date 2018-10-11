@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get 'pages/new_member_guide', as: 'new_member_guide'
   root 'pages#landing'
 
-  resources :activities
+  resources :activities do
+    delete :delete_image_attachment
+  end
   resource :my_page
 
   namespace :admin do
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
 
     resources :activities do
       post :approve, on: :member
+      # delete :delete_image_attachment
     end
   end
 end

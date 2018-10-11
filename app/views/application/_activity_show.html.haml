@@ -1,10 +1,19 @@
 %h2= @activity.title
+%h5 Images
+- (0...@activity.images.count).each do |image|
+  %div{style: "width:300px;"}
+    = image_tag(@activity.thumbnail(image), style: 'width:100%;height: auto;')
+    = link_to 'Remove', activity_delete_image_attachment_path(@activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
+
+%hr
+%h5 Category
 %span="#{@activity.category} Experience"
-%br
+%hr
+%h5 Host
 %span= "Activity hosted by #{@activity.member.first_name}"
-%br
+%hr
+%h5 Location
 %span= @activity.location
-%br
 
 %hr
 %h5= "About Your Host: #{@activity.member.first_name}"
