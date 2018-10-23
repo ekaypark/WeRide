@@ -35,11 +35,15 @@ gem 'mini_magick', '~> 4.8'
 
 gem 'devise'
 
+gem 'bootstrap', '~> 4.1.3'
 gem 'bootstrap-sass'
 gem 'haml'
 gem 'haml-rails'
-gem 'bootstrap_form'
+gem "bootstrap_form", ">= 4.0.0.alpha1"
 gem 'jquery-rails'
+gem 'jquery-timepicker-rails'
+gem "simple_calendar", "~> 2.0"
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

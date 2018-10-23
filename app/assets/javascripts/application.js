@@ -15,6 +15,12 @@
 //= require turbolinks
 //= require jquery
 //= require_tree .
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+//= require jquery-ui
+//= require jquery.timepicker.js
+//= require jquery-ui.multidatespicker
 
 
 var getUrlParameter = function getUrlParameter(sParam) {

@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :activities do
     delete :delete_image_attachment
   end
-  resource :my_page
+
+  resource :my_page do
+    resource :schedule
+  end
 
   namespace :admin do
     root 'activities#index'

@@ -8,6 +8,7 @@ class Member < ApplicationRecord
   validates :email, uniqueness: true
 
   has_many :activities
+  has_many :schedules
 
   enum role: [ :user, :host, :admin]
 end
