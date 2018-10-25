@@ -1,0 +1,48 @@
+= "Reservation for #{@activity.title} at #{@schedule.start_at.strftime("%m/%d/%Y %H:%M")}"
+
+.row
+  .col-md-8
+    = bootstrap_form_for [:activity, @reservation] do |f|
+      = f.hidden_field :member_id, value: current_member.id
+      = f.hidden_field :schedule_id, value: @schedule.id
+      = f.select :participant_count do
+        = options_for_select(1..10)
+      = f.submit
+
+  .col-md-4
+    %div
+      %h3 Details
+      %hr
+      - if @activity.images.any?
+        = image_tag @activity.images.first, style: 'width:100%;'
+      %hr
+      = @activity.title
+      %hr
+      = @schedule.start_at.strftime("%m/%d/%Y")
+      = " #{@schedule.start_at.strftime("%H:%M %p")} - #{@schedule.end_at.strftime("%H:%M %p")}"
+      %hr
+      = "#{(@schedule.end_at - @schedule.start_at)/(60*60)} Hours"
+      %hr
+      price:
+      %span{class:"price"}= @activity.price
+      %hr
+      total price:
+      %span{class:"total_price"}= @activity.price
+      %hr
+      %span Cancellation Policy
+      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+/ option:selected
+
+:javascript
+  var participant_selector = $('#reservation_participant_count');
+
+  participant_selector.on("change", function() {
+    console.log($(this).val() * $('.price').html());
+    $('.total_price').html($(this).val() * $('.price').html());
+  });

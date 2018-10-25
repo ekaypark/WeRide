@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'pages/render_time_on_dates', as: 'render_time_on_dates'
 
   resources :activities do
+    resources :reservations
     delete :delete_image_attachment
   end
 

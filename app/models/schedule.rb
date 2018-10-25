@@ -11,4 +11,13 @@ class Schedule < ApplicationRecord
   def end_time
       self.end_at ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
   end
+
+  def date
+    start_at.strftime("%m/%d/%Y")
+  end
+
+  def time_range
+    "#{start_at.strftime("%H:%M %p")} - #{end_at.strftime("%H:%M %p")}"
+
+  end
 end

@@ -25,6 +25,7 @@
 
   $('#reservation_calendar').datepicker({
     dateFormat: 'yy-mm-dd',
+    minDate: 0,
     beforeShowDay: enableAllTheseDays,
     onSelect: function(date) {
       $.get('/pages/render_time_on_dates', {selected_date: date, activity_id: activity_id}, function(result) {

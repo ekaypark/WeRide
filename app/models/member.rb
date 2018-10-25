@@ -9,6 +9,7 @@ class Member < ApplicationRecord
 
   has_many :activities
   has_many :schedules
+  has_many :reservations
 
   enum role: [ :user, :host, :admin]
 end
