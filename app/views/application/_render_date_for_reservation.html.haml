@@ -1,0 +1,9 @@
+%hr
+%span{style:"font-size: 12px;"}= "Availabillity for #{schedules.first.start_at.strftime("%m/%d/%y")}"
+%hr
+- schedules.each do |schedule|
+  %span{style:"font-size: 12px;"}= "#{schedule.start_at.strftime("%H:%m")} - #{schedule.end_at.strftime("%H:%m")}"
+  %br
+  %span{style:"font-size: 12px;"}= "#{schedule.activity.price} per person"
+  / = button_to "book", '#', style: 'text-align: right;'
+  %hr

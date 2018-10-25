@@ -1,3 +1,35 @@
 = render "activity_show"
 
-= link_to "Edit", edit_activity_path(@activity)
+.reservation_bar
+  %h3 Reserve this activity
+  = link_to "See Dates", '#', class: 'see_dates'
+  = link_to "X", '#', class: 'close_reservation_bar'
+
+  .row
+    .col-md-6
+      #reservation_calendar{"data-available-dates"=>"#{@available_schedules}"}
+    .col-md-6
+      #date_selector
+
+:javascript
+  var enableDays = $('#reservation_calendar').data("available-dates");
+  var activity_id = "#{j params[:id]}";
+
+  function enableAllTheseDays(date) {
+      var sdate = $.datepicker.formatDate( 'yy-mm-dd', date)
+      if($.inArray(sdate, enableDays) != -1) {
+          return [true];
+      }
+      return [false];
+  }
+
+  $('#reservation_calendar').datepicker({
+    dateFormat: 'yy-mm-dd',
+    beforeShowDay: enableAllTheseDays,
+    onSelect: function(date) {
+      $.get('/pages/render_time_on_dates', {selected_date: date, activity_id: activity_id}, function(result) {
+        $('#date_selector').html(result.html_string);
+        self.reset();
+      }, 'json');
+    }
+  });

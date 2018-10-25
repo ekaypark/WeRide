@@ -21,6 +21,7 @@ class ActivitiesController < ApplicationController
 
   def show
     @activity = Activity.find params[:id]
+    @available_schedules = @activity.schedules.map{|s| s.start_at.strftime("%Y-%m-%d")}
   end
 
   def edit

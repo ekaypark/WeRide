@@ -1,16 +1,24 @@
-%h2 Landing Page
+%h3 WeRide Signature Tours
 %hr
 
-- if member_signed_in?
-  %span Congratulations you are now a We Ride member. We will keep you up
-  to date with the latest community news and events. What else would
-  you like to do?:
+.row
+  - @tours.each_with_index do |tour, index|
+    - index = index+1
+    .col-md-3
+      .image-card
+        = link_to tour do
+          / = image_tag tour.images.first
+          = tour.title
+%br
+%br
 
-  %br
-  %a{href: "#"} Guide a weride signature tour
-  %br
-  %a{href: new_activity_path} Host my own tour idea
-  %br
-  %a{href: "#"} Learn more about hosting a tour
-  %br
-  %a{href: "#"} That's all for now!!
+%h3 Approved Activities
+%hr
+.row
+  - @activities.each_with_index do |activity, index|
+    - index = index+1
+    .col-md-3
+      .image-card
+        = link_to activity do
+          / = image_tag activity.images.first
+          = activity.title

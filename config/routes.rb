@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'pages/new_member_guide', as: 'new_member_guide'
   root 'pages#landing'
 
+  get 'pages/render_time_on_dates', as: 'render_time_on_dates'
+
   resources :activities do
     delete :delete_image_attachment
   end
