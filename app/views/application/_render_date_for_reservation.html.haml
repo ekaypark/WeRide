@@ -1,9 +1,14 @@
-%hr
-%span{style:"font-size: 12px;"}= "Availabillity for #{schedules.first.start_at.strftime("%m/%d/%y")}"
-%hr
-- schedules.each do |schedule|
-  %span{style:"font-size: 12px;"}= "#{schedule.start_at.strftime("%H:%m")} - #{schedule.end_at.strftime("%H:%m")}"
-  %br
-  %span{style:"font-size: 12px;"}= "#{schedule.activity.price} per person"
-  = link_to "Book", new_activity_reservation_path(schedule.activity, schedule_id: schedule), class: 'btn btn-primary'
+.time_render_section
   %hr
+  %span{style:"font-size: 14px;"}= "Availabillity for #{schedules.first.start_at.strftime("%m/%d/%y")}"
+  %hr
+  - schedules.each do |schedule|
+    .row
+      .col-md-8
+        %span{style:"font-size: 12px;"}= "#{schedule.start_at.strftime("%H:%M %P")} - #{schedule.end_at.strftime("%H:%M %P")}"
+        %br
+        %span{style:"font-size: 12px;"}= "#{number_to_currency schedule.activity.price} per person"
+
+      .col-md-4
+        = link_to "Book", new_activity_reservation_path(schedule.activity, schedule_id: schedule), class: 'btn btn-primary'
+    %hr
