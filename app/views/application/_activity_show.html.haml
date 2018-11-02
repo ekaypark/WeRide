@@ -1,66 +1,68 @@
 %div{style: 'margin-bottom: 150px;'}
-  %h2= @activity.title
-  - if current_member == @activity.member
-    = link_to "Edit", edit_activity_path(@activity)
+  .row
+    .col-md-4
+      = image_tag(@activity.images.first, style: 'width:100%;height: auto;')
 
-  %h5 Images
-  - (0...@activity.images.count).each do |image|
-    %div{style: "width:300px;"}
-      = image_tag(@activity.thumbnail(image), style: 'width:100%;height: auto;')
-      = link_to 'Remove', activity_delete_image_attachment_path(@activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
+    .col-md-8
+      = @activity.category
+      %h1= @activity.title
+      - if current_member == @activity.member
+        = link_to "Edit", edit_activity_path(@activity)
+      %hr
+      .row
+        .col-md-8
+          %h5= "About your host, #{@activity.member.first_name}"
+          %p= @activity.intro
 
-  %hr
-  %h5 Category
-  %span="#{@activity.category} Experience"
-  %hr
-  %h5 Host
-  %span= "Activity hosted by #{@activity.member.first_name}"
-  %hr
-  %h5 Location
-  %span= @activity.location
+        .col-md-4
+          %span= @activity.location
+          %span= @activity.total_time
 
-  %hr
-  %h5= "About Your Host: #{@activity.member.first_name}"
-  %p= @activity.intro
+      %hr
+      .row
+        .col-md-8
+          %h5 What We'll Do
+          %p= @activity.overview
 
-  %hr
-  %h5 What We'll Do
-  %p= @activity.overview
+          %h5 What else you should know?
+          %p= @activity.notes
+          / %p= @activity.how_active
 
-  %hr
-  %h5 What I'll Provide
-  %p= @activity.host_arrangement
+        .col-md-4
+          %h6 What I'll Provide
+          %p= @activity.host_arrangement
 
-  %hr
-  %h5 Notes
-  %p= @activity.notes
+          %h6 What to Bring
+          %p= @activity.participant_preparation
+          - if @activity.id_required
+            %p Valid ID
 
-  %h3 Setting infos
-
-  %hr
-  %h5 Alcohol Served
-  %p= @activity.alcohol_served
 
   %hr
-  %h5 Minimum Age
-  %p= @activity.minimum_age
+  .row
+    .col-md-4
+      %h1 Keep these in mind
+    .col-md-8
+      .row
+        .col-md-6
+          %h5 Cancellation policy
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .col-md-6
+          %h5 Group size
+          %p= @activity.group_size
 
-  %hr
-  %h5 How Active
-  %p= @activity.how_active
+      %hr
+      .row
+        .col-md-6
+          %h5 Who can come
+          %p= @activity.minimum_age
+          %p= @activity.additional_requirement
 
-  %hr
-  %h5 Additional Requirement
-  %p= @activity.additional_requirement
-
-  %hr
-  %h5 ID Required?
-  %p= @activity.id_required
-
-  %hr
-  %h5 Group size
-  %p= @activity.group_size
-
-  %hr
-  %h5 Total Time
-  %p= @activity.total_time
+        .col-md-6
+          %h5 Alcohol Served
+          %p= @activity.alcohol_served

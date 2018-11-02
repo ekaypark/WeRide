@@ -1,10 +1,7 @@
-%h3 WeRide Signature Tours
-%hr
-
 .row
   - @tours.each_with_index do |tour, index|
     - index = index+1
-    .col-md-3
+    .col-md-4
       .image-card
         = link_to tour do
           / = image_tag tour.images.first
@@ -12,7 +9,6 @@
 %br
 %br
 
-%h3 Approved Activities
 %hr
 .row
   - @activities.each_with_index do |activity, index|
@@ -20,5 +16,9 @@
     .col-md-3
       .image-card
         = link_to activity do
-          / = image_tag activity.images.first
-          = activity.title
+          .card--image
+            = image_tag activity.thumbnail(0)
+          .card--text
+            %span.category= activity.category
+            %span.title= activity.title
+            %span.price= "#{number_to_currency activity.price} per person"

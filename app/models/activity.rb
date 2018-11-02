@@ -5,7 +5,7 @@ class Activity < ApplicationRecord
 
   scope :available, -> {joins(:schedules).where.not(schedules: {id: nil}).uniq}
 
-  # validates :title, presence: true
+  validates :member_id, :location, :category, :intro, :overview, :address01, :address02, :zipcode, :legal_requirement, :host_arrangement, :participant_preparation, :notes, :price, :title, :minimum_age, :how_active, :additional_requirement, :group_size, :total_time, presence: true
   validate :image_type
 
   enum status: [ :draft, :pending, :approved, :signature ]

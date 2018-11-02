@@ -1,15 +1,21 @@
 = render "activity_show"
 
-.reservation_bar
-  %h3 Reserve this activity
-  = link_to "See Dates", '#', class: 'see_dates'
-  = link_to "X", '#', class: 'close_reservation_bar'
-
+#reservation_bar
   .row
-    .col-md-6
-      #reservation_calendar{"data-available-dates"=>"#{@available_schedules}"}
-    .col-md-6
-      #date_selector
+    .col-md-11
+      %h3.intro_title Reserve this activity
+    .col-md-1
+      = link_to "See Dates", '#', class: 'see_dates btn btn-primary'
+      = link_to "X", '#', class: 'close_reservation_bar'
+
+  #booking_section
+    .row
+      .col-md-4
+        %h1 When would you like to book?
+      .col-md-4
+        #reservation_calendar{"data-available-dates"=>"#{@available_schedules}"}
+      .col-md-4
+        #date_selector
 
 :javascript
   var enableDays = $('#reservation_calendar').data("available-dates");

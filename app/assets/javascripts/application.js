@@ -25,18 +25,20 @@ $(document).on("turbolinks:load", function(){
   $(function(){
     $('.see_dates').on('click', function(e){
       e.preventDefault();
-      $(this).parent().css('height', '500px');
-      $(this).parent().find('.close_reservation_bar').show();
-      $(this).parent().find('#reservation_calendar').show();
+      $("#reservation_bar").css('height', '500px');
+      $('.close_reservation_bar').show();
+      $("#booking_section").show();
       $(this).hide();
+      $('.intro_title').hide();
     });
 
     $('.close_reservation_bar').on('click', function(e){
       e.preventDefault();
-      $(this).parent().css('height', '100px');
-      $(this).parent().find('.see_dates').show();
-      $(this).parent().find('#reservation_calendar').hide();
+      $("#reservation_bar").css('height', '100px');
+      $('.see_dates').show();
+      $("#booking_section").hide();
       $(this).hide();
+      $('.intro_title').show();
     });
   });
 

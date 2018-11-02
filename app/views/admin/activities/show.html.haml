@@ -1,4 +1,70 @@
-= render "activity_show"
+%div{style: 'margin-bottom: 150px;'}
+  %h2= @activity.title
+  - if current_member == @activity.member
+    = link_to "Edit", edit_activity_path(@activity)
+
+  %h5 Images
+  - (0...@activity.images.count).each do |image|
+    %div{style: "width:300px;"}
+      = image_tag(@activity.thumbnail(image), style: 'width:100%;height: auto;')
+      = link_to 'Remove', activity_delete_image_attachment_path(@activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
+
+  %hr
+  %h5 Category
+  %span="#{@activity.category} Experience"
+  %hr
+  %h5 Host
+  %span= "Activity hosted by #{@activity.member.first_name}"
+  %hr
+  %h5 Location
+  %span= @activity.location
+
+  %hr
+  %h5= "About Your Host: #{@activity.member.first_name}"
+  %p= @activity.intro
+
+  %hr
+  %h5 What We'll Do
+  %p= @activity.overview
+
+  %hr
+  %h5 What I'll Provide
+  %p= @activity.host_arrangement
+
+  %hr
+  %h5 Notes
+  %p= @activity.notes
+
+  %h3 Setting infos
+
+  %hr
+  %h5 Alcohol Served
+  %p= @activity.alcohol_served
+
+  %hr
+  %h5 Minimum Age
+  %p= @activity.minimum_age
+
+  %hr
+  %h5 How Active
+  %p= @activity.how_active
+
+  %hr
+  %h5 Additional Requirement
+  %p= @activity.additional_requirement
+
+  %hr
+  %h5 ID Required?
+  %p= @activity.id_required
+
+  %hr
+  %h5 Group size
+  %p= @activity.group_size
+
+  %hr
+  %h5 Total Time
+  %p= @activity.total_time
+
 
 - unless @activity.approved? || @activity.signature?
   = link_to "approve", approve_admin_activity_path(@activity), method: :post

@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_member!
   def new
     @activity = Activity.find params[:activity_id]
     @schedule = Schedule.find params[:schedule_id]
