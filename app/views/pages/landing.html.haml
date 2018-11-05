@@ -13,11 +13,11 @@
 .row
   - @activities.each_with_index do |activity, index|
   - index = index+1
-  .col-md-3
-    .image-card
-      = link_to activity do
-        .card--image= image_tag activity.thumbnail(0)
-        .card--text
-          %span.category= activity.category
-          %span.title= activity.title
-          %span.price= "#{number_to_currency activity.price} per person"
+    .col-md-3
+      .image-card
+        = link_to activity do
+          .card--image= image_tag activity.thumbnail(0)
+          .card--text
+            %span.category= activity.category
+            %span.title= activity.title
+            %span.price= "#{number_to_currency activity.price} per person"
