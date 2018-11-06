@@ -26,12 +26,12 @@
   = f.text_area :notes, label: "What else do guests need to know before they book?", placeholder: "Put yourself in a guest’s shoes. Some information may seem obvious, but be detailed so guests are over-prepared."
   = f.text_field :title
 
-  = f.label "Images"
-  - (0...@activity.images.count).each do |image|
-    %div{style: "width:300px;"}
-      = image_tag(@activity.thumbnail(image), style: 'width:100%;height: auto;')
-      = link_to 'Remove', activity_delete_image_attachment_path(@activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
-  = f.file_field :images, multiple: true
+  / = f.label "Images"
+  / - (0...@activity.images.count).each do |image|
+  /   %div{style: "width:300px;"}
+  /     = image_tag(@activity.thumbnail(image), style: 'width:100%;height: auto;')
+  /     = link_to 'Remove', activity_delete_image_attachment_path(@activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
+  / = f.file_field :images, multiple: true
 
   / Setting
   = f.number_field :price

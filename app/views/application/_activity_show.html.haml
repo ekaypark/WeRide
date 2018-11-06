@@ -1,7 +1,8 @@
 %div{style: 'margin-bottom: 150px;'}
   .row
     .col-md-4
-      = image_tag(@activity.images.first, style: 'width:100%;height: auto;')
+      / = image_tag(@activity.images.first, style: 'width:100%;height: auto;')
+      = image_tag "weride_fallback.png", style: 'width:100%;height: auto;'
 
     .col-md-8
       = @activity.category
