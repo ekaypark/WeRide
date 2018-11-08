@@ -1,21 +1,96 @@
-= render "activity_show"
-
-#reservation_bar
+%div{style: 'margin-bottom: 150px;'}
   .row
-    .col-md-11
-      %h3.intro_title Reserve this activity
-    .col-md-1
-      = link_to "See Dates", '#', class: 'see_dates btn btn-primary'
-      = link_to "X", '#', class: 'close_reservation_bar'
+    .col-md-4
+      / = image_tag(@activity.images.first, style: 'width:100%;height: auto;')
+      = image_tag "weride_fallback.png", style: 'width:100%;height: auto;'
 
-  #booking_section
-    .row
-      .col-md-4
-        %h1 When would you like to book?
-      .col-md-4
-        #reservation_calendar{"data-available-dates"=>"#{@available_schedules}"}
-      .col-md-4
-        #date_selector
+    .col-md-8
+      = @activity.category
+      %h1= @activity.title
+      %hr
+      .row
+        .col-md-8
+          %h5= "About your host, #{@activity.member.first_name}"
+          %p= @activity.intro
+
+        .col-md-4
+          %span= @activity.location
+          %span= @activity.total_time
+
+      %hr
+      .row
+        .col-md-8
+          %h5 What We'll Do
+          %p= @activity.overview
+
+          %h5 What else you should know?
+          %p= @activity.notes
+          / %p= @activity.how_active
+
+        .col-md-4
+          %h6 What I'll Provide
+          %p= @activity.host_arrangement
+
+          %h6 What to Bring
+          %p= @activity.participant_preparation
+          - if @activity.id_required
+            %p Valid ID
+
+
+  %hr
+  .row
+    .col-md-4
+      %h1 Keep these in mind
+    .col-md-8
+      .row
+        .col-md-6
+          %h5 Cancellation policy
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .col-md-6
+          %h5 Group size
+          %p= @activity.group_size
+
+      %hr
+      .row
+        .col-md-6
+          %h5 Who can come
+          %p= @activity.minimum_age
+          %p= @activity.additional_requirement
+
+        .col-md-6
+          %h5 Alcohol Served
+          %p= @activity.alcohol_served
+
+
+- if member_signed_in?
+  - if @activity.member == current_member
+    #reservation_bar
+      = link_to "this is your tour. go to your host page to modify", host_activity_path(@activity)
+  - else
+    #reservation_bar
+      .row
+        .col-md-11
+          %h3.intro_title Reserve this activity
+        .col-md-1
+          = link_to "See Dates", '#', class: 'see_dates btn btn-primary'
+          = link_to "X", '#', class: 'close_reservation_bar'
+
+      #booking_section
+        .row
+          .col-md-4
+            %h1 When would you like to book?
+          .col-md-4
+            #reservation_calendar{"data-available-dates"=>"#{@available_schedules}"}
+          .col-md-4
+            #date_selector
+- else
+  #reservation_bar
+    = link_to "Sign in to reserve this tour", new_member_session_path
 
 :javascript
   var enableDays = $('#reservation_calendar').data("available-dates");
@@ -34,7 +109,7 @@
     minDate: 0,
     beforeShowDay: enableAllTheseDays,
     onSelect: function(date) {
-      $.get('/pages/render_time_on_dates', {selected_date: date, activity_id: activity_id}, function(result) {
+      $.get('/activities/activity_id/render_time_on_dates', {selected_date: date, activity_id: activity_id}, function(result) {
         $('#date_selector').html(result.html_string);
         self.reset();
       }, 'json');

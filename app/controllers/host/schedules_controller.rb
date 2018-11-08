@@ -1,4 +1,4 @@
-class SchedulesController < ApplicationController
+class Host::SchedulesController < ApplicationController
   before_action :authenticate_member!
 
 
@@ -21,6 +21,6 @@ class SchedulesController < ApplicationController
         end_at: DateTime.parse(dates[i] + " " + end_time)
       )
     end
-    redirect_to my_page_schedule_path
+    redirect_to host_schedule_path
   end
 end

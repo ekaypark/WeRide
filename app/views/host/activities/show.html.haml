@@ -1,0 +1,4 @@
+= render partial: 'activity_show', locals: {activity: @activity, from: "host"}
+
+= link_to 'Edit', edit_host_activity_path(@activity), class: 'btn btn-primary'
+= link_to 'Back to List', host_activities_path, class: 'btn btn-default'

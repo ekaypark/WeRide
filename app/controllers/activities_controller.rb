@@ -1,22 +1,7 @@
 class ActivitiesController < ApplicationController
-  before_action :authenticate_member!, except: :show
-
-  def new
-    @activity = Activity.new
-  end
-
-  def create
-    @activity = Activity.new activity_params
-    @activity.member = current_member
-    if @activity.valid?
-      @activity.status = Activity.statuses["pending"]
-      @activity.save
-      # probably need a different logic later e.g. host info.
-      @activity.member.host! if @activity.member.user?
-      redirect_to my_page_path
-    else
-      render 'new'
-    end
+  def index
+    @tours = Activity.signature.available#.order(created_at: :desc)
+    @activities = Activity.approved.available#.order(created_at: :desc)
   end
 
   def show
@@ -24,28 +9,17 @@ class ActivitiesController < ApplicationController
     @available_schedules = @activity.schedules.map{|s| s.start_at.strftime("%Y-%m-%d")}
   end
 
-  def edit
-    @activity = Activity.find params[:id]
-  end
+  def render_time_on_dates
+    @activity = Activity.find params[:activity_id]
+    @date = Date.parse(params[:selected_date])
 
-  def update
-    @activity = Activity.find params[:id]
-    if @activity.update activity_params
-      redirect_to @activity
+    @schedules = @activity.schedules.where('start_at BETWEEN ? AND ?', @date.beginning_of_day, @date.end_of_day)
+
+    if @schedules.present?
+      html_string = render_to_string partial: '/application/render_date_for_reservation', locals: {schedules: @schedules}
+      render json: {html_string: html_string}
     else
-      render :new
+      render json: {status: 'not ok'}
     end
-  end
-
-  def delete_image_attachment
-    @image = ActiveStorage::Attachment.find(params[:activity_id])
-    @image.purge
-    redirect_back(fallback_location: activities_path)
-  end
-
-  private
-
-  def activity_params
-    params.require(:activity).permit(:member_id, :location, :category, :intro, :overview, :address01, :address02, :zipcode, :legal_requirement, :host_arrangement, :participant_preparation, :notes, :price, :title, :status, :alcohol_served, :minimum_age, :how_active, :additional_requirement, :id_required, :group_size, :total_time, images: [])
   end
 end

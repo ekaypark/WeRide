@@ -1,10 +1,9 @@
-class Admin::ActivitiesController < Admin::ApplicationController
+class Host::ActivitiesController < ApplicationController
+  before_action :authenticate_member!
+
   def index
-    if params[:activity_status].present?
-      @activities = Activity.where(status: params[:activity_status]).order(created_at: :desc)
-    else
-      @activities = Activity.pending.order(created_at: :desc)
-    end
+    @member = current_member
+    @activities = @member.activities.order(created_at: :desc)
   end
 
   def show
@@ -18,13 +17,15 @@ class Admin::ActivitiesController < Admin::ApplicationController
   def create
     @activity = Activity.new activity_params
     @activity.member = current_member
-    @activity.status = Activity::statuses[:signature]
-    if @activity.save
-      redirect_to admin_activities_path
+    if @activity.valid?
+      @activity.status = Activity.statuses["pending"]
+      @activity.save
+      redirect_to host_path
     else
-      render 'new'
+      render :new
     end
   end
+
 
   def edit
     @activity = Activity.find params[:id]
@@ -33,23 +34,16 @@ class Admin::ActivitiesController < Admin::ApplicationController
   def update
     @activity = Activity.find params[:id]
     if @activity.update activity_params
-      redirect_to [:admin, @activity]
+      redirect_to [:host, @activity]
     else
       render :new
     end
   end
 
-  def approve
-    @activity = Activity.find params[:id]
-    @activity.approved!
-    @activity.member.host! if @activity.member.user?
-    redirect_to [:admin, @activity]
-  end
-
   def delete_image_attachment
     @image = ActiveStorage::Attachment.find(params[:activity_id])
     @image.purge
-    redirect_back(fallback_location: admin_activities_path)
+    redirect_back(fallback_location: host_activities_path)
   end
 
   private

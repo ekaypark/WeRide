@@ -13,6 +13,7 @@
 
       .navbar-nav.pull-right
         - if member_signed_in?
+          %a.nav-item.nav-link{href: host_path} Host
           %a.nav-item.nav-link{href: my_page_path} My Page
           %a.nav-item.nav-link{href: destroy_member_session_path, "data-method" => "delete"} Sign Out
         - else

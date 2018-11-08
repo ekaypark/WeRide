@@ -12,12 +12,3 @@
     %hr
 - else
   You need to start your reservation!
-
-- if @member.activities.any?
-  %h3 My Activities
-  - @member.activities.each do |a|
-    = link_to a.title, activity_path(a)
-    %br
-
-  %h3 My Schedules
-  = link_to "calendar", my_page_schedule_path

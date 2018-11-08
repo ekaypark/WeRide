@@ -1,43 +1,90 @@
-= bootstrap_form_for activity do |f|
-  = f.text_field :location, placeholder: 'Which city will you host your experience in?'
+= bootstrap_form_for [from, activity] do |f|
+  = f.text_field :location, label: 'Which city and neighbourhood will you host your activity?', placeholder: "If your activity is mobile please select the starting point as the neighborhood."
 
-  = f.select :category do
-    = options_for_select(Activity::CATEGORY)
+  %hr
 
-  = f.text_area :intro, label: "Tell guests what makes you qualified to host this experience", placeholder: "Mentioning all the things that make you a great person to host this experience will give you bonus points while we review your submission. This could include personal qualities, qualifications, accomplishments, awards, or even the length of time you’ve been practicing or studying your craft."
+  = f.label "What kind of activity will you offer?"
+  = f.select(:category, Activity::CATEGORY, hide_label: true)
 
-  = f.text_area :overview, label: "Describe what you’ll do", placeholder: "Get guests excited with a fun, detailed description of the itinerary."
+  %hr
+
+  %h5 About You
+  = f.text_area :intro, label: "Tell us what makes you want to create this event. What qualifies you to be our guide and what do you offer that is unique? You may like to include how long you have been practising the activity and why you are enthusiastic about doing what you do.", placeholder: "Don't be shy! Encourage your guests with your skills, knowledge and great character!"
+
+  %hr
+
+  %h5 Tell us about your activity.
+  = f.text_area :overview, label: "Tantalize your guests with details of the activity that awaits them. Where will they go, What will they see? And why is it cool? What is unique about this activity and why should we all want to try it?", placeholder: "Put your itinerary in the order from start of the event to the end. Be detailed and descriptive. This is the place to sell it!"
+
+  %hr
 
   = f.label "Choose your legal requirement status for your activity."
   = f.radio_button :legal_requirement, 0, label: 'No license applying to tours, tour guides, or tourist services is required for me to operate my experience.'
   = f.radio_button :legal_requirement, 1, label: 'I have all necessary licenses or permits that apply to tours, tour guides, and tourist services.'
 
-  %h3 Where Should Guests Meet You?
+  %hr
+
+  %h5 Where Should Guests Meet You?
   %span Tell guests exactly where to meet you at the start of the experience. Make sure the location is easy to find. The exact address won’t be shared until the guest’s reservation is confirmed.
   = f.text_field :address01
   = f.text_field :address02
   = f.text_field :zipcode
 
-  = f.text_area :host_arrangement, label: "What will you provide for guests?", placeholder: "It’s important to let guests know what you’ll provide because it helps them understand what they’re paying for."
-  = f.text_area :participant_preparation, label: "What should guests bring with them?", placeholder: "Think through everything a guest will need to have with them during the experience that you’re not already providing. This will be emailed to guests once they book."
+  %hr
+
+  %h5 What will you be providing for your guests?
+  = f.text_area :host_arrangement, label: "What necessary or bonus items will you be providing? Why are they necessary or why do they add value? Try to provide items that are needed for the event but most people don't have at home or would find it hard to bring. Try to provide some items that make the activity more pleasant.", placeholder: "Give details of what is included in the cost/activity. Food? Drinks? Equipment?"
+
+  %hr
+
+  %h5 What should your Guests bring?
+  = f.text_area :participant_preparation, label: "What is not included but necessary for your activity? What would you suggest they bring to improve their experience of your activity? What can the guest prepare to make the activity safer and more comfortable?", placeholder: "enter items here"
+
+  %hr
+
   = f.text_area :notes, label: "What else do guests need to know before they book?", placeholder: "Put yourself in a guest’s shoes. Some information may seem obvious, but be detailed so guests are over-prepared."
-  = f.text_field :title
 
-  = f.label "Images"
-  / @activity/activity? gotta check partial locals
-  - (0...@activity.images.count).each do |image|
-    %div{style: "width:300px;"}
-      = image_tag(@activity.thumbnail(image), style: 'width:100%;height: auto;')
-      = link_to 'Remove', activity_delete_image_attachment_path(@activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
-  = f.file_field :images, multiple: true, hide_label: true
+  %hr
 
-  / Setting
+  %h5 Give your event a title:
+  = f.text_field :title, label: 'Think about what best describes your activity. What will you do and where will you do it.', placeholder: 'Call your guests to action!!'
+
+  / %h5 Add a photo
+  / A picture can speak a thousand words… lets give them a better idea of what to expect!
+  / Choose a high quality picture of the activity in location. Don't post a selfie with a filter.. we can do better than that. Post a detailed depiction of what the guest will experience.
+  / - (0...@activity.images.count).each do |image|
+  /   %div{style: "width:300px;"}
+  /     = image_tag(@activity.thumbnail(image), style: 'width:100%;height: auto;')
+  /     - if from == "host"
+  /       = link_to 'Remove', host_activity_delete_image_attachment_path(activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
+  /     - elsif from == "admin"
+  /       = link_to 'Remove', admin_activity_delete_image_attachment_path(activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
+  /     / = link_to 'Remove', [from, activity, :delete_image, activity.images[image]], method: :delete, data: {confirm: "Are you sure?"}
+  / = f.file_field :images, multiple: true
+
+  %hr
+
+  %br
+  %br
+
+  %h5 Setting
+
+  %hr
+  %br
+
   = f.number_field :price
+
+  %hr
 
   = f.label "Alcohol Served"
   = f.check_box :alcohol_served, label: "Yes"
+
+  %hr
+
   = f.select :minimum_age do
     = options_for_select(Activity::MINIMUM_AGE_ARRAY)
+
+  %hr
 
   = f.label "How strenuous is the activity?"
   = f.radio_button :how_active, 0, label: "Mostly Seated"
@@ -46,14 +93,25 @@
   = f.radio_button :how_active, 3, label: "High"
   = f.radio_button :how_active, 4, label: "Strenuous"
 
+  %hr
+
   = f.text_area :additional_requirement, placeholder: "E.g. Guests should have prior surfing experience, guests must have a scuba license, guests should be comfortable around dogs."
+
+  %hr
 
   = f.label "Is the ID Required for the Activity?"
   = f.check_box :id_required, label: "Yes"
 
+  %hr
+
   = f.select :group_size do
     = options_for_select(Activity::GROUPSIZE_ARRAY)
 
+  %hr
+
   = f.select :total_time do
     = options_for_select(Activity::TOTALTIME_ARRAY)
+
+  %hr
+
   = f.submit
