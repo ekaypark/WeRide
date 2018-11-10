@@ -18,10 +18,14 @@
             %a#hostMenuDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
               Host
             .dropdown-menu{"aria-labelledby" => "hostMenuDropdown"}
-              %a.dropdown-item{:href => host_schedule_path} Schedule
-              %a.dropdown-item{:href => host_activities_path} Activities
-              / .dropdown-divider
-              / %a.dropdown-item{:href => "#"} Transaction
+              - if current_member.host?
+                %a.dropdown-item{:href => host_schedule_path} Schedule
+                %a.dropdown-item{:href => host_activities_path} Activities
+                / .dropdown-divider
+                / %a.dropdown-item{:href => "#"} Transaction
+              - else
+                %a.dropdown-item{:href => new_member_guide_path} Learn about hosting
+                %a.dropdown-item{:href => host_activities_path} Activities
 
           %li.nav-item.dropdown
             %a#myMenuDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
