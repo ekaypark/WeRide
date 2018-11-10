@@ -17,8 +17,8 @@ class Host::SchedulesController < ApplicationController
       Schedule.create(
         member_id: current_member.id,
         activity_id: activity_id,
-        start_at: DateTime.parse(dates[i] + " " + start_time),
-        end_at: DateTime.parse(dates[i] + " " + end_time)
+        start_at: DateTime.parse(dates[i] + " " + start_time + "#{Time.zone}"),
+        end_at: DateTime.parse(dates[i] + " " + end_time + "#{Time.zone}")
       )
     end
     redirect_to host_schedule_path
