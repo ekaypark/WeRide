@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   end
 
   namespace :my_page do
-    resources :reservations
+    resources :reservations do
+      post :cancel_request, on: :member
+    end
   end
 
   namespace :host do
@@ -28,6 +30,9 @@ Rails.application.routes.draw do
     resources :activities do
       post :approve, on: :member
       delete :delete_image_attachment
+    end
+    resources :reservations do
+      post :update_status, on: :member
     end
   end
 end

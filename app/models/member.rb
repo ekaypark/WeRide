@@ -12,4 +12,27 @@ class Member < ApplicationRecord
   has_many :reservations
 
   enum role: [ :user, :host, :admin]
+
+
+  # probably unsuitable staying here. maybe a service will do & also cache.
+  def upcoming_reservations
+    upcoming = []
+    reservations.each do |r|
+      if r.schedule.start_at >= Time.now
+        upcoming.push(r)
+      end
+    end
+    upcoming.sort_by { |r| r.schedule.start_at }
+  end
+
+  def passed_reservations
+    passed = []
+    reservations.each do |r|
+      if r.schedule.start_at < Time.now
+        passed.push(r)
+      end
+    end
+    passed.sort_by { |r| r.schedule.start_at }
+  end
+
 end

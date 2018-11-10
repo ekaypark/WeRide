@@ -1,6 +1,7 @@
 class Schedule < ApplicationRecord
   belongs_to :member
   belongs_to :activity
+  has_many :reservations
 
   validates :member_id, :activity_id, :start_at, :end_at, presence: true
 

@@ -1,6 +1,6 @@
 class Admin::ApplicationController < ApplicationController
   before_action :ensure_admin
-  # layout 'admin'
+  layout 'admin'
 
   private
 

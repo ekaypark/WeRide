@@ -13,7 +13,7 @@ class ReservationsController < ApplicationController
 
     @reservation = Reservation.new reservation_params
     if @reservation.save
-      redirect_to my_page_path
+      redirect_to my_page_reservations_path
     else
       render action: :new, params: {activity_id: @activity, schedule_id: @schedule}
     end

@@ -1,0 +1,62 @@
+%ul.nav.nav-tabs.status-tabs{style: "margin: 20px 0;"}
+  %li.pending
+    %a{:href => admin_reservations_path(reservation_status: "pending")}="Pending (#{Reservation.pending.count})"
+
+  %li.confirmed
+    %a{:href => admin_reservations_path(reservation_status: "confirmed")}="Confirmed (#{Reservation.confirmed.count})"
+  %li.cancel_resquested
+    %a{:href => admin_reservations_path(reservation_status: "cancel_requested")}="Cancel Requested (#{Reservation.cancel_requested.count})"
+
+  %li.cancelled
+    %a{:href => admin_reservations_path(reservation_status: "cancelled")}="Cancelled (#{Reservation.cancelled.count})"
+
+
+%table.table
+  %thead
+    %tr
+      %th Participant Name
+      %th Activity
+      %th Scheduled for
+      %th Total Price
+      %th Status / Timestamp
+      %th Action
+  %tbody
+    - @reservations.each do |r|
+      %tr
+        %td= "#{r.member.first_name } #{r.member.last_name } "
+        %td= link_to r.schedule.activity.title, admin_activity_path(r.schedule.activity)
+        %td= "#{r.schedule.date} #{r.schedule.time_range}"
+        %td= number_to_currency r.total_price
+        %td
+          - if r.cancel_verdict_at.present?
+            %span{style: 'display: block;'}= "#{r.status} at #{r.cancel_verdict_at.strftime("%m/%d/%Y %H:%M:%S %p")}"
+          - elsif r.confirmed_at.present?
+            %span{style: 'display: block;'}= "confirmed at #{r.confirmed_at.strftime("%m/%d/%Y %H:%M:%S %p")}"
+          - if r.cancel_requested?
+            %span{style: 'display: block;'}= "cancel_requested_at: #{r.cancel_requested_at.strftime("%m/%d/%Y %H:%M:%S %p")}"
+
+        %td
+          - if r.pending?
+            = link_to "confirm", update_status_admin_reservation_path(r, admin_action: "confirm"), method: :post
+          - elsif r.cancel_requested?
+            = link_to "cancel", update_status_admin_reservation_path(r, admin_action: "cancel"), method: :post, "data-confirm" => "Are you sure? you must make sure to refund."
+            / = link_to 'communicate with the customer', '#'
+
+:javascript
+  $(document).ready(function () {
+
+    var reservation_status = getUrlParameter("reservation_status");
+
+    console.log(reservation_status);
+
+
+
+    if ( typeof reservation_status == "undefined" ) {
+      $('.status-tabs').find("li").removeClass("active");
+      $('.pending').addClass("active");
+    } else {
+      $('.status-tabs').find("li").removeClass("active");
+      $("." + reservation_status).addClass("active");
+    };
+  });
+

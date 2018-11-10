@@ -1,10 +1,49 @@
-%h3 My Reservations
 - if @member.reservations.any?
-  - @member.reservations.each do |r|
+  %h3 Upcoming Reservations
+  %hr
+
+  - @upcoming_reservations.each do |r|
+    .my_reservation_card
+      .card-title= r.schedule.date
+
+      .card-desc
+        %table.table
+          %tr
+            %th Activity:
+            %td= link_to r.schedule.activity.title, activity_path(r.schedule.activity), target: "_blank"
+
+          %tr
+            %th Scheduled For:
+            %td= "#{r.schedule.date} #{r.schedule.time_range}"
+          %tr
+            %th Booked For:
+            %td= "#{r.participant_count} person(s)."
+
+          %tr
+            %th Status:
+            %td
+              %span.badge.badge-secondary= r.status
+              - if r.cancel_requested?
+                = " at #{r.cancel_requested_at.strftime("%m/%d/%Y %H:%M:%S %p")}"
+              - if r.cancelled?
+                = " at #{r.cancel_verdict_at.strftime("%m/%d/%Y %H:%M:%S %p")}"
+              - else
+                = link_to "Cancel this reservation", cancel_request_my_page_reservation_path(r), method: :post, class: 'btn btn-danger'
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+
+  %h3 Past Reservations
+  %hr
+
+  - @passed_reservations.each do |r|
     = r.schedule.activity.title
     = r.schedule.date
     = r.schedule.time_range
     = "You booked for #{r.participant_count} person(s)."
-    %hr
+
 - else
-  You need to start your reservation!
+  = link_to "Start your reservation!", root_path
