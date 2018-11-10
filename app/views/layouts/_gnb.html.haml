@@ -5,17 +5,34 @@
         = image_tag 'logo.png', alt: 'WeRide'
     %button.navbar-toggler{"aria-controls" => "navbarNavAltMarkup", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavAltMarkup", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
-    #navbarNavAltMarkup.collapse.navbar-collapse
-      / .navbar-nav
-      /   %a.nav-item.nav-link{:href => "#"} Features
-      /   %a.nav-item.nav-link{:href => "#"} Pricing
-      /   %a.nav-item.nav-link.disabled{:href => "#"} Disabled
+    / #navbarNavAltMarkup.collapse.navbar-collapse.justify-content-start
+    /   %nav.navbar.navbar-light.bg-light.justify-content-start
+    /     %form.form-inline
+    /       %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
+    /       %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
 
-      .navbar-nav.pull-right
+    #navbarNavAltMarkup.collapse.navbar-collapse.justify-content-end
+      %ul.navbar-nav
         - if member_signed_in?
-          %a.nav-item.nav-link{href: host_path} Host
-          %a.nav-item.nav-link{href: my_page_path} My Page
-          %a.nav-item.nav-link{href: destroy_member_session_path, "data-method" => "delete"} Sign Out
+          %li.nav-item.dropdown
+            %a#hostMenuDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Host
+            .dropdown-menu{"aria-labelledby" => "hostMenuDropdown"}
+              %a.dropdown-item{:href => host_schedule_path} Schedule
+              %a.dropdown-item{:href => host_activities_path} Activities
+              / .dropdown-divider
+              / %a.dropdown-item{:href => "#"} Transaction
+
+          %li.nav-item.dropdown
+            %a#myMenuDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Me
+            .dropdown-menu{"aria-labelledby" => "myMenuDropdown"}
+              %a.dropdown-item{:href => edit_member_registration_path} Profile
+              %a.dropdown-item{:href => my_page_reservations_path} Reservation
+              .dropdown-divider
+              %a.dropdown-item{:href => destroy_member_session_path, "data-method" => "delete"} Sign Out
         - else
-          %a.nav-item.nav-link{href: new_member_session_path} Sign In
-          %a.nav-item.nav-link{href: new_member_registration_path} Register
+          %li.nav-item
+            %a.nav-link{href: new_member_session_path} Sign In
+          %li.nav-item
+            %a.nav-link{href: new_member_registration_path} Register

@@ -1,7 +1,3 @@
-%h2{style: "display: inline"}= "#{@member.email}'s Page"
-%a.pull-right{href: edit_member_registration_path} Edit My Info
-%hr
-
 %h3 My Reservations
 - if @member.reservations.any?
   - @member.reservations.each do |r|

@@ -12,12 +12,10 @@ Rails.application.routes.draw do
     get 'render_time_on_dates', on: :member
   end
 
-  resource :my_page, only: :show
   namespace :my_page do
     resources :reservations
   end
 
-  resource :host, only: :show
   namespace :host do
     resources :activities do
       delete :delete_image_attachment

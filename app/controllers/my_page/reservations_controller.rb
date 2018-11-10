@@ -1,7 +1,7 @@
-class HostsController < ApplicationController
+class MyPage::ReservationsController < ApplicationController
   before_action :authenticate_member!
 
-  def show
+  def index
     @member = current_member
   end
 end
