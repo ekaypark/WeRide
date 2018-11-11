@@ -25,7 +25,7 @@
               %span.badge.badge-secondary= r.status
               - if r.cancel_requested?
                 = " at #{r.cancel_requested_at.strftime("%m/%d/%Y %H:%M:%S %p")}"
-              - if r.cancelled?
+              - elsif r.cancelled?
                 = " at #{r.cancel_verdict_at.strftime("%m/%d/%Y %H:%M:%S %p")}"
               - else
                 = link_to "Cancel this reservation", cancel_request_my_page_reservation_path(r), method: :post, class: 'btn btn-danger'
