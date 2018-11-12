@@ -10,6 +10,7 @@ class Member < ApplicationRecord
   has_many :activities
   has_many :schedules
   has_many :reservations
+  has_many :payout_infos
 
   enum role: [ :user, :host, :admin]
 

@@ -1,0 +1,23 @@
+= link_to 'Create New Account', new_host_payout_info_path, class: 'btn btn-primary'
+
+%table.table
+  %thead
+    %tr
+      %th Bank
+      %th Holder Name
+      %th Account Number
+      %th Default?
+
+  - @infos.each do |info|
+    %tbody
+      %tr
+        %td= info.bank_name
+        %td= info.account_holder_name
+        %td= info.account_number
+        %td
+          - if info.default_use
+            Yes
+          - else
+            = link_to "Make Default", make_default_host_payout_info_path(info), method: :post, class: 'btn btn-danger'
+
+

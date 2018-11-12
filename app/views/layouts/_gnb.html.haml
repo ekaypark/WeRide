@@ -21,7 +21,8 @@
               - if current_member.host?
                 %a.dropdown-item{:href => host_schedule_path} Schedule
                 %a.dropdown-item{:href => host_activities_path} Activities
-                / .dropdown-divider
+                .dropdown-divider
+                %a.dropdown-item{:href => host_payout_infos_path} Payout Method
                 / %a.dropdown-item{:href => "#"} Transaction
               - else
                 %a.dropdown-item{:href => new_member_guide_path} Learn about hosting
