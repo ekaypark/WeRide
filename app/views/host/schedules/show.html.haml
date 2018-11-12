@@ -1,3 +1,7 @@
+- unless @member.payout_infos.present?
+  .alert.alert-primary{:role => "alert"}
+    = link_to "Add your payout info before proceeding with your scheduling", host_payout_infos_path
+
 / #calendar
 
 = month_calendar events: @schedules do |date, schedules|
@@ -15,14 +19,17 @@
 %div
   %h3 Multiple Schedule Uploader
 
-  = bootstrap_form_tag url: "/host/schedule/" do
-    / = label_tag(:q, "Search for:")
-    = text_field_tag(:dates)
-    = text_field_tag(:start_time)
-    = text_field_tag(:end_time)
-    - activities_array = @member.activities.approved.map{|activity| [activity.title, activity.id]}
-    = select_tag(:activity_id, options_for_select(activities_array), include_blank: 'Select the Tour')
-    = submit_tag("submit")
+  - if @member.payout_infos.present?
+    = bootstrap_form_tag url: "/host/schedule/" do
+      / = label_tag(:q, "Search for:")
+      = text_field_tag(:dates)
+      = text_field_tag(:start_time)
+      = text_field_tag(:end_time)
+      - activities_array = @member.activities.approved.map{|activity| [activity.title, activity.id]}
+      = select_tag(:activity_id, options_for_select(activities_array), include_blank: 'Select the Tour')
+      = submit_tag("submit")
+  - else
+    = link_to "Add your payout info before proceeding with your scheduling", host_payout_infos_path
 
   :javascript
     $('#dates').multiDatesPicker({
