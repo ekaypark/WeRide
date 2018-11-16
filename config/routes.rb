@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :payout_infos do
       post :make_default, on: :member
     end
+    resources :invoices
   end
 
   namespace :admin do
@@ -36,6 +37,9 @@ Rails.application.routes.draw do
     end
     resources :reservations do
       post :update_status, on: :member
+    end
+    resources :invoices do
+      post :complete_payout, on: :member
     end
   end
 end

@@ -11,6 +11,7 @@ class Member < ApplicationRecord
   has_many :schedules
   has_many :reservations
   has_many :payout_infos
+  has_many :invoices
 
   enum role: [ :user, :host, :admin]
 
@@ -36,4 +37,7 @@ class Member < ApplicationRecord
     passed.sort_by { |r| r.schedule.start_at }
   end
 
+  def full_name
+    last_name + first_name
+  end
 end

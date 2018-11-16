@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_193904) do
+ActiveRecord::Schema.define(version: 2018_11_16_201112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,24 @@ ActiveRecord::Schema.define(version: 2018_11_12_193904) do
     t.boolean "id_required", default: false
     t.integer "group_size"
     t.integer "total_time"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer "schedule_id"
+    t.integer "member_id"
+    t.integer "status", default: 0
+    t.datetime "paid_out_at"
+    t.integer "total_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "confirmed_reservation_ids", default: [], array: true
+  end
+
+  create_table "invoices_reservations", id: false, force: :cascade do |t|
+    t.bigint "reservation_id"
+    t.bigint "invoice_id"
+    t.index ["invoice_id"], name: "index_invoices_reservations_on_invoice_id"
+    t.index ["reservation_id"], name: "index_invoices_reservations_on_reservation_id"
   end
 
   create_table "members", force: :cascade do |t|

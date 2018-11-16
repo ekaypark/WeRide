@@ -1,11 +1,22 @@
+= link_to "Host activity!", new_host_activity_path, class: 'btn btn-primary'
+
 - if @member.activities.approved.any?
   %h3 Activities I am hosting
+  %hr
   - @member.activities.each do |a|
     = link_to a.title, host_activity_path(a)
     %br
 
-- elsif @member.activities.pending.any?
+%br
+%br
+%br
+%br
+%br
+
+- if @member.activities.pending.any?
   %h3 Activities I am working on
+  %hr
+
   - @member.activities.each do |a|
     = link_to a.title, edit_host_activity_path(a)
 
@@ -14,4 +25,3 @@
 /   - @member.activities.each do |a|
 /     = link_to a.title, edit_host_activity_path(a)
 
-%h4= link_to "Host activity!", new_host_activity_path

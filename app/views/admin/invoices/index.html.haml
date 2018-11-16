@@ -1,0 +1,36 @@
+%ul.nav.nav-tabs.status-tabs
+  %li.pending
+    %a{:href => admin_invoices_path(payout_status: "pending")}="Pending (#{Invoice.pending.count})"
+
+  %li.complete
+    %a{:href => admin_invoices_path(payout_status: "complete")}="Complete (#{Invoice.complete.count})"
+
+
+%table.table
+  %thead
+    %tr
+      %th Invoice ID
+      %th Schedule
+      %th Recipient
+      %th Payout Status
+      %th Reservations
+      %th Total
+      %th Action
+
+  - @invoices.each do |invoice|
+    %tbody
+      %tr
+        %td= invoice.id
+        %td= invoice.schedule.id
+        %td= invoice.member.full_name
+        %td= invoice.status
+        %td= invoice.schedule.reservations.confirmed.map(&:id)
+        %td
+          - if invoice.complete?
+            = invoice.total_amount
+          - else
+            = invoice.tentative_total_price
+
+        %td
+          - if invoice.pending?
+            = link_to "Confirm Payout", complete_payout_admin_invoice_path(invoice), method: :post, class: 'btn btn-danger', "data-confirm" => "Are you sure?"

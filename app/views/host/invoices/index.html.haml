@@ -1,0 +1,30 @@
+%ul.nav.nav-tabs.status-tabs
+  %li.pending
+    %a{:href => host_invoices_path(payout_status: "pending")}="Pending (#{Invoice.pending.count})"
+
+  %li.complete
+    %a{:href => host_invoices_path(payout_status: "complete")}="Complete (#{Invoice.complete.count})"
+
+%table.table
+  %thead
+    %tr
+      %th Invoice ID
+      %th Schedule
+      %th Recipient
+      %th Payout Status
+      %th Reservations
+      %th Total
+
+  %tbody
+    - @invoices.each do |invoice|
+      %tr
+        %td= invoice.id
+        %td= invoice.schedule.id
+        %td= invoice.member.full_name
+        %td= invoice.status
+        %td= invoice.schedule.reservations.confirmed.map(&:id)
+        %td
+          - if invoice.complete?
+            = invoice.total_amount
+          - else
+            = invoice.tentative_total_price

@@ -1,6 +1,13 @@
 class Reservation < ApplicationRecord
+  after_save :persist_invoice
+
+  attr_accessor :old_status
+  attr_accessor :new_status
+
   belongs_to :member
   belongs_to :schedule
+  has_and_belongs_to_many :invoices
+
 
   validates :schedule_id, :participant_count, :member_id, presence: true
 
@@ -9,4 +16,13 @@ class Reservation < ApplicationRecord
   def total_price
     participant_count * schedule.activity.price
   end
+
+  def persist_invoice
+    if confirmed?
+      unless Invoice.where(schedule_id: schedule).present?
+        Invoice.create(schedule_id: schedule_id, member_id: schedule.member_id)
+      end
+    end
+  end
+
 end
