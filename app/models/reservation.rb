@@ -1,9 +1,6 @@
 class Reservation < ApplicationRecord
   after_save :persist_invoice
 
-  attr_accessor :old_status
-  attr_accessor :new_status
-
   belongs_to :member
   belongs_to :schedule
   has_and_belongs_to_many :invoices
