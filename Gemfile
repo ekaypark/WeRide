@@ -44,6 +44,7 @@ gem 'jquery-rails'
 gem 'jquery-timepicker-rails'
 gem "simple_calendar", "~> 2.0"
 
+gem "aws-sdk-s3", require: false
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
