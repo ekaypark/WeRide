@@ -20,7 +20,7 @@ class Host::ActivitiesController < ApplicationController
     if @activity.valid?
       @activity.status = Activity.statuses["pending"]
       @activity.save
-      redirect_to host_path
+      redirect_to host_activities_path
     else
       render :new
     end
