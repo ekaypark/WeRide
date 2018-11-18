@@ -9,7 +9,7 @@
         = link_to 'Remove', host_activity_delete_image_attachment_path(activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
       - elsif from == "admin"
         = link_to 'Remove', admin_activity_delete_image_attachment_path(activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
-      = link_to 'Remove', [from, activity, :delete_image, activity.images[image]], method: :delete, data: {confirm: "Are you sure?"}
+      / = link_to 'Remove', [from, activity, :delete_image, activity.images[image]], method: :delete, data: {confirm: "Are you sure?"}
 
   %hr
   %h5 Category
