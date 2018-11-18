@@ -5,8 +5,7 @@
       .image-card
         = link_to tour do
           .card--image
-            = image_tag "weride_fallback.png"
-            / = image_tag tour.images.first
+            = image_tag tour.images.first
           .card--text
             %span.category= tour.category
             %span.title= tour.title
@@ -23,8 +22,7 @@
       .image-card
         = link_to activity do
           .card--image
-            = image_tag "weride_fallback.png"
-            / = image_tag activity.thumbnail(0)
+            = image_tag activity.thumbnail(0)
           .card--text
             %span.category= activity.category
             %span.title= activity.title
