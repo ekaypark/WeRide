@@ -8,6 +8,12 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render '/layouts/gnb'
+    - if flash[:notice].present?
+      .alert.alert-primary{:role => "alert"}
+        = flash[:notice]
+    - elsif flash[:alert].present?
+      .alert.alert-danger{:role => "alert"}
+        = flash[:alert]
     .container{style: 'margin-top: 80px;'}
       = yield
 

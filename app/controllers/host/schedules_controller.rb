@@ -4,6 +4,9 @@ class Host::SchedulesController < ApplicationController
 
   def show
     @member = current_member
+    unless @member.payout_infos.present?
+      redirect_to host_payout_infos_path, alert: "Add your payout info before proceeding with your scheduling."
+    end
     @schedules = @member.schedules.order(created_at: :desc)
   end
 
