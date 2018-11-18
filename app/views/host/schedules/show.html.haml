@@ -14,8 +14,8 @@
   = bootstrap_form_tag url: "/host/schedule/" do
     / = label_tag(:q, "Search for:")
     = text_field_tag :dates, nil,  placeholder: 'Click to enable calendar'
-    = text_field_tag(:start_time)
-    = text_field_tag(:end_time)
+    = text_field_tag :start_time, nil,  placeholder: 'Start time'
+    = text_field_tag :end_time, nil,  placeholder: 'End Time'
     - activities_array = @member.activities.approved.map{|activity| [activity.title, activity.id]}
     = select_tag(:activity_id, options_for_select(activities_array), include_blank: 'Select the Tour')
     = submit_tag "submit", class: 'btn btn-primary'
