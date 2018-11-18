@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'activities#index'
+    resource :schedule
     resources :activities do
       post :approve, on: :member
       delete :delete_image_attachment

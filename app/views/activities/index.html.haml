@@ -1,11 +1,17 @@
 .row
   - @tours.each_with_index do |tour, index|
-    - index = index+1
+  - index = index+1
     .col-md-4
       .image-card
         = link_to tour do
-          / = image_tag tour.images.first
-          = tour.title
+          .card--image
+            = image_tag "weride_fallback.png"
+            / = image_tag tour.images.first
+          .card--text
+            %span.category= tour.category
+            %span.title= tour.title
+            %span.price= "#{number_to_currency tour.price} per person"
+
 %br
 %br
 
