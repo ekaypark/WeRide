@@ -49,18 +49,18 @@
   %h5 Give your event a title:
   = f.text_field :title, label: 'Think about what best describes your activity. What will you do and where will you do it.', placeholder: 'Call your guests to action!!'
 
-  / %h5 Add a photo
-  / A picture can speak a thousand words… lets give them a better idea of what to expect!
-  / Choose a high quality picture of the activity in location. Don't post a selfie with a filter.. we can do better than that. Post a detailed depiction of what the guest will experience.
-  / - (0...@activity.images.count).each do |image|
-  /   %div{style: "width:300px;"}
-  /     = image_tag(@activity.thumbnail(image), style: 'width:100%;height: auto;')
-  /     - if from == "host"
-  /       = link_to 'Remove', host_activity_delete_image_attachment_path(activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
-  /     - elsif from == "admin"
-  /       = link_to 'Remove', admin_activity_delete_image_attachment_path(activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
-  /     / = link_to 'Remove', [from, activity, :delete_image, activity.images[image]], method: :delete, data: {confirm: "Are you sure?"}
-  / = f.file_field :images, multiple: true
+  %h5 Add a photo
+  A picture can speak a thousand words… lets give them a better idea of what to expect!
+  Choose a high quality picture of the activity in location. Don't post a selfie with a filter.. we can do better than that. Post a detailed depiction of what the guest will experience.
+  - (0...@activity.images.count).each do |image|
+    %div{style: "width:300px;"}
+      = image_tag(@activity.thumbnail(image), style: 'width:100%;height: auto;')
+      - if from == "host"
+        = link_to 'Remove', host_activity_delete_image_attachment_path(activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
+      - elsif from == "admin"
+        = link_to 'Remove', admin_activity_delete_image_attachment_path(activity.images[image]), method: :delete, data: {confirm: "Are you sure?"}
+      / = link_to 'Remove', [from, activity, :delete_image, activity.images[image]], method: :delete, data: {confirm: "Are you sure?"}
+  = f.file_field :images, multiple: true
 
   %hr
 
