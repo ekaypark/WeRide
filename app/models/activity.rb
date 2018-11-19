@@ -25,7 +25,11 @@ class Activity < ApplicationRecord
   # end
 
   def thumbnail input
-    return self.images[input].variant(resize: '300x300').processed
+    return self.images[input].variant(resize: '300x200').processed
+  end
+
+  def vertical input
+    return self.images[input].variant(combine_options: { resize: "300<x400", extent: "300x400", background: "grey", gravity: "center"}).processed
   end
 
   private

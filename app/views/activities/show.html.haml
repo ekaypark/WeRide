@@ -1,7 +1,9 @@
 %div{style: 'margin-bottom: 150px;'}
   .row
     .col-md-4
-      = image_tag(@activity.images.first, style: 'width:100%;height: auto;')
+      .owl-carousel
+        - (0...@activity.images.count).each do |i|
+          = image_tag @activity.vertical(i), class: 'img-responsive img-vertical'
 
     .col-md-8
       = @activity.category

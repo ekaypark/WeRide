@@ -20,6 +20,7 @@
 //= require jquery-ui
 //= require jquery.timepicker.js
 //= require jquery-ui.multidatespicker
+//= require owl.carousel.min.js
 
 $(document).on("turbolinks:load", function(){
   $(function(){
@@ -39,6 +40,19 @@ $(document).on("turbolinks:load", function(){
       $("#booking_section").hide();
       $(this).hide();
       $('.intro_title').show();
+    });
+  });
+
+  $(function(){
+    $(".owl-carousel").owlCarousel({
+      items:1,
+      // dots:true,
+      // nav:true,
+      loop:true,
+      autoplay: false,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true,
+      autoHeight: true
     });
   });
 
