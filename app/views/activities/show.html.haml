@@ -16,13 +16,16 @@
 
         .col-md-4
           %span= @activity.location
-          %span= @activity.total_time
+          %br
+          %span= "Takes #{@activity.total_time} hours"
 
       %hr
       .row
         .col-md-8
           %h5 What We'll Do
           %p= @activity.overview
+
+          %br
 
           %h5 What else you should know?
           %p= @activity.notes
@@ -31,6 +34,8 @@
         .col-md-4
           %h6 What I'll Provide
           %p= @activity.host_arrangement
+
+          %br
 
           %h6 What to Bring
           %p= @activity.participant_preparation
@@ -54,18 +59,19 @@
           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         .col-md-6
           %h5 Group size
-          %p= @activity.group_size
+          %p= "Maximum #{@activity.group_size} people per tour"
 
       %hr
       .row
         .col-md-6
           %h5 Who can come
-          %p= @activity.minimum_age
+          %p= "People over #{@activity.minimum_age}"
           %p= @activity.additional_requirement
 
         .col-md-6
           %h5 Alcohol Served
-          %p= @activity.alcohol_served
+          %p
+            = @activity.alcohol_served ? "Yes" : "No"
 
 
 - if member_signed_in?
