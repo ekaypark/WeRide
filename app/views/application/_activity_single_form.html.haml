@@ -81,8 +81,7 @@
 
   %hr
 
-  = f.select :minimum_age do
-    = options_for_select(Activity::MINIMUM_AGE_ARRAY)
+  = f.select :minimum_age, Activity::MINIMUM_AGE_ARRAY, {}
 
   %hr
 
@@ -104,13 +103,11 @@
 
   %hr
 
-  = f.select :group_size do
-    = options_for_select(Activity::GROUPSIZE_ARRAY)
+  = f.select :group_size, Activity::GROUPSIZE_ARRAY, {}
 
   %hr
 
-  = f.select :total_time do
-    = options_for_select(Activity::TOTALTIME_ARRAY)
+  = f.select :total_time, Activity::TOTALTIME_ARRAY, {}
 
   %hr
 

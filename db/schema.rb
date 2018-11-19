@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_16_201112) do
+ActiveRecord::Schema.define(version: 2018_11_19_105501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2018_11_16_201112) do
     t.text "additional_requirement"
     t.boolean "id_required", default: false
     t.integer "group_size"
-    t.integer "total_time"
+    t.string "total_time"
   end
 
   create_table "invoices", force: :cascade do |t|
