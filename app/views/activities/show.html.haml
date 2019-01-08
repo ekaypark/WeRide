@@ -18,7 +18,19 @@
           %span= @activity.location
           %br
           %span= "Takes #{@activity.total_time} hours"
-
+          %br
+          %br
+          %h6 Activity Level
+          - if @activity.how_active == 0
+            %p Mostly Seated
+          - if @activity.how_active == 1
+            %p Light
+          - if @activity.how_active == 2
+            %p Moderate
+          - if @activity.how_active == 3
+            %p High
+          - if @activity.how_active == 4
+            %p Strenuous
       %hr
       .row
         .col-md-8
@@ -29,7 +41,6 @@
 
           %h5 What else you should know?
           %p= @activity.notes
-          / %p= @activity.how_active
 
         .col-md-4
           %h6 What I'll Provide
