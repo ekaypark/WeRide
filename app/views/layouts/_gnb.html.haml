@@ -15,20 +15,6 @@
       %ul.navbar-nav
         - if member_signed_in?
           %li.nav-item.dropdown
-            %a#hostMenuDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-              Host
-            .dropdown-menu{"aria-labelledby" => "hostMenuDropdown"}
-              - if current_member.host?
-                %a.dropdown-item{:href => host_schedule_path} Schedule
-                %a.dropdown-item{:href => host_activities_path} Activities
-                .dropdown-divider
-                %a.dropdown-item{:href => host_payout_infos_path} Payout Method
-                %a.dropdown-item{:href => host_invoices_path} Invoice
-              - else
-                %a.dropdown-item{:href => new_member_guide_path} Learn about hosting
-                %a.dropdown-item{:href => host_activities_path} Activities
-
-          %li.nav-item.dropdown
             %a#myMenuDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
               Me
             .dropdown-menu{"aria-labelledby" => "myMenuDropdown"}
@@ -40,4 +26,4 @@
           %li.nav-item
             %a.nav-link{href: new_member_session_path} Sign In
           %li.nav-item
-            %a.nav-link{href: new_member_registration_path} Register
+            %a.nav-link{href: new_member_registration_path} Join

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # get 'pages/landing'
   # get 'pages/render_time_on_dates', as: 'render_time_on_dates'
-  get 'pages/new_member_guide', as: 'new_member_guide'
+  # get 'pages/new_member_guide', as: 'new_member_guide'
 
   resources :activities, only: [:index, :show] do
     resources :reservations
